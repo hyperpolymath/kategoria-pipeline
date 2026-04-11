@@ -27,22 +27,22 @@ maturity = "experimental"
 milestones = [
   { name = "Repo created and pushed to GitHub", completion = 100 },
   { name = "research/ directory structure created", completion = 100 },
-  { name = "First L11 candidate formalized in Idris2 (L11-modal-box)", completion = 60 },
-  { name = "L11-modal-box comonad laws proved (remove believe_me)", completion = 0 },
+  { name = "First L11 candidate formalized in Idris2 (L11-modal-box)", completion = 100 },
+  { name = "L11-modal-box comonad laws proved (believe_me-free)", completion = 100 },
   { name = "First graduated artefact promoted to typell", completion = 0 },
 ]
 
 [blockers-and-issues]
 issues = [
-  "L11-modal-box/Modal.idr: comonadLaw1 and comonadLaw2 use believe_me — proofs pending.",
-  "L11-modal-box: semantics choice open (S4 global vs. contextual modal types).",
+  "L11-modal-box: semantics choice open (S4 global vs. contextual modal types — Nanevski–Pfenning–Pientka 2008).",
+  "L11-modal-box: QTT integration not yet specified (how does Box interact with grade lattice?).",
 ]
 
 [critical-next-actions]
 actions = [
-  "Prove comonadLaw1/comonadLaw2 in Modal.idr without believe_me.",
   "Decide S4 vs. contextual modal type theory (read Nanevski–Pfenning–Pientka 2008).",
-  "Add a reading-notes artefact for the modal types literature.",
+  "Add a reading-notes artefact for contextual modal types.",
+  "Specify QTT integration: how Box propagates grades through dup/unbox.",
 ]
 
 [maintenance-status]

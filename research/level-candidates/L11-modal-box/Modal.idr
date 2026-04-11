@@ -135,28 +135,27 @@ liftFlatten : (bb : Box (Box a)) -> boxLift (boxFlatten bb) = bb
 liftFlatten (MkBox (MkBox x)) = Refl
 
 -- ─────────────────────────────────────────────────────────────────────────────
--- The structural weakening rule (OPEN — requires believe_me)
+-- Comonad laws
 -- ─────────────────────────────────────────────────────────────────────────────
 --
--- OPEN ITEM 1: the Comonadic strength for Box.
--- In categorical terms, Box is a comonad: extract = unbox, duplicate = dup,
--- and the comonad laws should hold.  We state them and mark them OPEN.
+-- In categorical terms, Box is a comonad: extract = unbox (fst projection),
+-- duplicate = dup.  The two counit laws hold by definitional reduction:
+--   fst (dup (MkBox x))  = fst (MkBox x, MkBox x)  = MkBox x  = id
+--   snd (dup (MkBox x))  = snd (MkBox x, MkBox x)  = MkBox x  = id
+-- Both proofs are Refl after a single pattern match.
 
-||| Comonad law 1: extract ∘ duplicate = id.
--- This says: duplicating and then extracting the first half is identity.
--- Proof: holds by definitional equality, but Idris2 cannot infer it
--- from the current definition because `dup` produces a pair and `fst`
--- needs to be shown to recover the original.  Needs a small auxiliary lemma.
--- OPEN: replace believe_me with real proof.
+||| Comonad law 1: fst ∘ dup = id.
+||| Proof: pattern match on `b` forces `b = MkBox x`.
+|||   dup (MkBox x)           reduces to  (MkBox x, MkBox x)
+|||   fst (MkBox x, MkBox x)  reduces to  MkBox x
+|||   MkBox x = MkBox x       is          Refl   ✓
 comonadLaw1 : (b : Box a) -> fst (dup b) = b
-comonadLaw1 b = believe_me Refl
--- ^ OPEN — needs proper proof (requires showing fst (MkBox x, MkBox x) = MkBox x
---   up to the linearity invariant; straightforward once threading is modelled).
+comonadLaw1 (MkBox x) = Refl
 
-||| Comonad law 2: duplicate ∘ extract = id (symmetric).
+||| Comonad law 2: snd ∘ dup = id.
+||| Same reasoning: snd (MkBox x, MkBox x) = MkBox x = b.
 comonadLaw2 : (b : Box a) -> snd (dup b) = b
-comonadLaw2 b = believe_me Refl
--- ^ OPEN — same justification as comonadLaw1.
+comonadLaw2 (MkBox x) = Refl
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- Example: a persistent connection pool
@@ -190,7 +189,7 @@ closePool pool = release pool
 --
 -- Before opening a PR on typell:
 --
--- [ ] Prove comonadLaw1 and comonadLaw2 without believe_me
+-- [x] Prove comonadLaw1 and comonadLaw2 without believe_me  (done: Refl after case split)
 -- [ ] Decide between S4 (global box) and contextual modal types
 -- [ ] Integrate Box with the QTT multiplicity semiring (grade propagation)
 -- [ ] Add a BoxedRegion type to typed-wasm's Layout.Types

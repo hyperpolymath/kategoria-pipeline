@@ -99,8 +99,8 @@ L11 in `typell` would add:
 . **QTT integration**: Formally define how Box interacts with QTT multiplicities.
   The grade of `unbox` should be ≤ the grade of the enclosing context.
 . **WasmGC mapping**: Specify the Idris2 ABI types for `BoxedRegion`.
-. **Proof**: The `Modal.idr` sketch currently uses `believe_me` for two of the
-  structural rules (see file).  These need real proofs before graduation.
+. **Proof**: The `Modal.idr` sketch is now fully `believe_me`-free.  All comonad
+  laws (`comonadLaw1`, `comonadLaw2`) are proved by a single pattern match (`Refl`).
 
 == Reference
 

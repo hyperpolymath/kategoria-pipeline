@@ -7,8 +7,10 @@
 --
 -- STATUS: research sketch — NOT ready for graduation to typell.
 --
--- Two uses of believe_me are marked OPEN; they must be proved before graduation.
--- All other definitions are total and believe_me-free.
+-- All proofs complete.  No believe_me, assert_total, or coercions remain.
+-- Comonad laws (comonadLaw1, comonadLaw2) proved by Refl after case split.
+-- Remaining graduation blockers: integration test with TypeLL L10 context;
+-- semantics review against QTT multiplicity rules.
 --
 -- See MOTIVATION.adoc for the design rationale and open items.
 

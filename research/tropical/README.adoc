@@ -74,6 +74,37 @@ results available as a proven foundation:
   Isabelle proof in `tropical-resource-typing`.
 * Graduation blockers listed at the top of the file.
 
+== Blocker Status (2026-04-11)
+
+[cols="1,1,3"]
+|===
+| Blocker | Status | Note
+
+| StarEquation
+| OPEN
+| Idris2 proof pending.  Isabelle: `trop_mat_star_equation`.
+
+| StarLeastFixpoint
+| DERIVED ↓
+| Now follows from StarEquation by power induction.  Postulated until StarEquation proved.
+
+| NoPosOycle encoding
+| CLOSED ✓
+| In min-plus with Nat costs: proved automatic (`noPosOycleAuto`).
+  Diagonal = `Lat 0` proved as `costMatStarDiag`.
+
+| StarIdem
+| DERIVED ↓
+| Reduced to `MatStarTriangle` (triangle inequality) + `costMatStarDiag`.
+  Still postulated via `MatStarTriangle`; one postulate replaces three.
+
+| Integration test
+| DEFERRED
+| TypeLL L10 context wiring — not math.
+|===
+
+**Postulate count**: was 3 → now 2 (`StarEquation` + `MatStarTriangle`).
+
 == Graduation Path
 
 [options="header",cols="1,3"]
